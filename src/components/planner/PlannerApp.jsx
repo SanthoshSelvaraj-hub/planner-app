@@ -1,29 +1,37 @@
 import { Component } from "react";
 import {Form, Button, Navbar} from 'react-bootstrap'
 import './PlannerApp.css'
-import {BrowserRouter as Router, Route} from 'react-router-dom'
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import { render } from "@testing-library/react";
 
 class PlannerApp extends Component{
     render(){
         return(
             <div className="plannerApp">
                 <Router>
-                    <div>
-                        <Route path="/" exact Component={LoginComponent}/>
-                        <Route path="/login" Component={LoginComponent}/>
-                        <Route path="/welcome" Component={WelcomeComponent}/>
-                    </div>
+                    <Switch>
+                        <Route path="/" exact component={LoginComponent}/>
+                        <Route path="/login" component={LoginComponent}/>
+                        <Route path="/welcome/:name" component={WelcomeComponent}/>
+                        <Route component={ErrorComponent}></Route>  
+                    </Switch>
+                    {/* <LoginComponent/>
+                    <WelcomeComponent/> */}
                 </Router> 
             </div>
         );
     }
 }
 
+function ErrorComponent(){
+    return <div>An error Occured.</div>
+}
+
 class WelcomeComponent extends Component{
     render(){
         return(
             <div>
-                Welcome Santhosh!!
+                Welcome {this.props.match.params.name}!!
             </div>
         );
     }
@@ -84,6 +92,7 @@ class LoginComponent extends Component{
 
     loginClicked(){
             if(this.state.username==='admin' && this.state.password==='admin') {
+                this.props.history.push(`/welcome/${this.state.username}`)
                 this.setState({
                     showSuccessMessage: true,
                     hasLoginFailed: false

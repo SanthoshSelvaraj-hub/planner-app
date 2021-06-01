@@ -2,3 +2,18 @@
     max-width: 200px;
     
 }
+
+.footer{
+    position: absolute;
+    bottom:0;
+    width: 95%;
+    height: 40px;
+    background-color: rgba(0, 0, 0, 0.774);
+}
+
+.card {
+    margin: 0 auto; /* Added */
+    float: none; /* Added */
+    margin-bottom: 10px; /* Added */
+    margin-top: 50px; /* Added */
+}

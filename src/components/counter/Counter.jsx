@@ -54,17 +54,6 @@ class CounterButton extends Component {
   // Define initial state in constructor
   //state=> counter 0
 
-  constructor(){
-    //this.state.counter wont work if dont use super
-    super();
-    // this.state = {
-    //   counter: 0
-    // }
-    // //bind increment with class to use this in increment method
-    // this.increment = this.increment.bind(this)
-    // this.decrement = this.decrement.bind(this)
-  }
-
   //Binding is not necesarry while using arrow function
   render(){
     return (

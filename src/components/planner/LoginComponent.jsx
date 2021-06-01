@@ -1,6 +1,6 @@
 import { Component } from "react";
 import AuthenticationService from './AuthenticationService.js'
-import {Form, Button, Card, Nav, Container, NavDropdown} from 'react-bootstrap'
+import {Form, Button, Card} from 'react-bootstrap'
 
 class LoginComponent extends Component{
 
@@ -22,7 +22,7 @@ class LoginComponent extends Component{
                 <div className="container">
                     
                     <Card border="primary" style={{ width: '18rem'}}>
-                        <Card.Header>Login</Card.Header>
+                        <Card.Header><h2>Login</h2></Card.Header>
                         <Card.Body>
                         <Form>
                             <Form.Group controlId="formBasicEmail">

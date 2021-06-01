@@ -1,7 +1,6 @@
 import { Component } from "react";
-import { Route, Redirect } from "react-router";
 import AuthenticationService from './AuthenticationService.js'
-import {Form, Button, Navbar, Nav, Container, NavDropdown} from 'react-bootstrap'
+import { Navbar, Nav, Container} from 'react-bootstrap'
 import {withRouter} from 'react-router'
 
 class HeaderComponent extends Component{

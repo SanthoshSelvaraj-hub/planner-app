@@ -1,6 +1,5 @@
 import { Component } from "react";
-import { Route, Redirect } from "react-router";
-import AuthenticationService from './AuthenticationService.js'
+
 
 class LogoutComponent extends Component{
     render(){

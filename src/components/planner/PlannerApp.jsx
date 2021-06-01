@@ -1,8 +1,6 @@
 import { Component } from "react";
 import './PlannerApp.css'
-import {BrowserRouter as Router, Route, Switch, Link, withRouter} from 'react-router-dom'
-import { render } from "@testing-library/react";
-import AuthenticationService from './AuthenticationService.js'
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import AuthenticatedRoute from './AuthenticatedRoute.jsx'
 import LoginComponent from './LoginComponent'
 import LogoutComponent from './LogoutComponent'

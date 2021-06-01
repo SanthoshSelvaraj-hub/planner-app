@@ -1,9 +1,11 @@
 import { Component } from "react";
-import { Route, Redirect } from "react-router";
-import AuthenticationService from './AuthenticationService.js'
-import {BrowserRouter as Router,  Switch, Link, withRouter} from 'react-router-dom'
+import { Link} from 'react-router-dom'
 
 class WelcomeComponent extends Component{
+    constructor(props){
+        super(props);
+        this.retrieveWelcomeMessage=this.retrieveWelcomeMessage(this);
+    }
     render(){
         return(
             <div>
@@ -11,9 +13,16 @@ class WelcomeComponent extends Component{
                 <div>
                     You can manage your tasks <Link to="/tasks">here</Link>.
                 </div>
-                
+                <div>
+                    Click here to get a customized welcome message.
+                    <button className='btn btn-success' onClick={this.retrieveWelcomeMessage}>Get welcome message</button>                
+                </div>
             </div>
         );
+    }
+
+    retrieveWelcomeMessage(){
+        console.log('Retrieve click')
     }
 }
 

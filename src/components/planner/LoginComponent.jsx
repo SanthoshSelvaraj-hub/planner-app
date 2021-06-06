@@ -34,7 +34,7 @@ class LoginComponent extends Component{
                                 <Form.Control type="password" placeholder="Password" name="password" value={this.state.password} onChange={this.handleChange}/>
                             </Form.Group>
                             {this.state.hasLoginFailed && <div className="alert alert-danger">Invalid Credentials</div>}
-                            <Button variant="primary" type="submit" onClick={this.loginClicked}>
+                            <Button variant="primary" onClick={this.loginClicked}>
                                 login
                             </Button>
                             </Form>

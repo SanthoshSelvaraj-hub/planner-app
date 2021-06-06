@@ -1,5 +1,6 @@
 import { Component } from "react";
-
+import TaskDataService from '../../api/planner/TaskDataService'
+import AuthenticationService from './AuthenticationService.js'
 
 class TaskListComponent extends Component{
     constructor(props){
@@ -7,13 +8,23 @@ class TaskListComponent extends Component{
         this.state = {
             tasks: 
             [
-                { id : 1, description: 'Learn React', done:false, targetDate: new Date()},
-                { id : 2, description: 'Apply for jobs', done:false, targetDate: new Date()},
-                { id : 3, description: 'Practice Hackerearth challenges', done:false, targetDate: new Date()}
+                // { id : 1, description: 'Learn React', done:false, targetDate: new Date()},
+                // { id : 2, description: 'Apply for jobs', done:false, targetDate: new Date()},
+                // { id : 3, description: 'Practice Hackerearth challenges', done:false, targetDate: new Date()}
             ]
         }
     }
 
+    componentDidMount(){
+        let username = AuthenticationService.getLoggedInUser
+        TaskDataService.retriveAllTasks(username)
+        .then(
+            response=>{
+                this.setState({tasks: response.data})
+            })
+    }
+
+    
     render(){
         return(
             <div>

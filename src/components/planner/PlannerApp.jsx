@@ -9,6 +9,7 @@ import WelcomeComponent from './WelcomeComponent'
 import HeaderComponent from './HeaderComponent'
 import FooterComponent from './FooterComponent'
 import ErrorComponent from './ErrorComponent'
+import TaskComponent from "./TaskComponent";
 
 
 class PlannerApp extends Component{
@@ -23,6 +24,7 @@ class PlannerApp extends Component{
                         <Route path="/login" component={LoginComponent}/>
                         <Route path="/logout" component={LogoutComponent}/>
                         <AuthenticatedRoute path="/welcome/:name" component={WelcomeComponent}/>
+                        <AuthenticatedRoute path="/tasks/:id" component={TaskComponent}/>
                         <AuthenticatedRoute path="/tasks" component={TaskListComponent}/>
                         <Route component={ErrorComponent}></Route>  
                     </Switch>

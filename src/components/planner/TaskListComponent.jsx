@@ -6,6 +6,7 @@ class TaskListComponent extends Component{
     constructor(props){
         super(props);
         this.state = {
+            message: null,
             tasks: 
             [
                 // { id : 1, description: 'Learn React', done:false, targetDate: new Date()},
@@ -13,9 +14,16 @@ class TaskListComponent extends Component{
                 // { id : 3, description: 'Practice Hackerearth challenges', done:false, targetDate: new Date()}
             ]
         }
+
+        this.deleteTaskClicked = this.deleteTaskClicked.bind(this)
+        this.refreshTasks = this.refreshTasks.bind(this)
     }
 
     componentDidMount(){
+        this.refreshTasks()
+    }
+
+    refreshTasks(){
         let username = AuthenticationService.getLoggedInUser
         TaskDataService.retriveAllTasks(username)
         .then(
@@ -24,11 +32,38 @@ class TaskListComponent extends Component{
             })
     }
 
+    deleteTaskClicked(id){
+        let username = AuthenticationService.getLoggedInUser()
+        // console.log(id + " " + username)
+        TaskDataService.deleteTask(username, id)
+        .then(
+            response=>{
+                this.setState({message: `Delete of ${id} successful`});
+                this.refreshTasks()
+            })
+
+    }
+
+    editTaskClicked(id){
+        console.log( "Edit " + id)
+        this.props.history.push(`/tasks/${id}`)
+        // let username = AuthenticationService.getLoggedInUser()
+        // // console.log(id + " " + username)
+        // TaskDataService.deleteTask(username, id)
+        // .then(
+        //     response=>{
+        //         this.setState({message: `Delete of ${id} successful`});
+        //         this.refreshTasks()
+        //     })
+
+    }
+
     
     render(){
         return(
             <div>
                 <h1>List of tasks</h1>
+                {this.state.message && <div className="alert alert-success">{this.state.message}</div>}
                     <div className="container">
                         <table className="table">
                             <thead>
@@ -36,6 +71,9 @@ class TaskListComponent extends Component{
                                     <th>Description</th>
                                     <th>Status</th>
                                     <th>Deadline</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
+                                    
                                 </tr>
                             </thead>
                             <tbody>
@@ -46,6 +84,8 @@ class TaskListComponent extends Component{
                                             <td>{task.description}</td>
                                             <td>{task.done.toString()}</td>
                                             <td>{task.targetDate.toString()}</td>
+                                            <td><button className="btn btn-success" onClick={()=>this.editTaskClicked(task.id)}>Edit</button></td>
+                                            <td><button className="btn btn-danger" onClick={()=>this.deleteTaskClicked(task.id)}>Delete</button></td>
                                         </tr>
                                     )
                                 }   

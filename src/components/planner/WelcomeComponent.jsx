@@ -21,13 +21,13 @@ class WelcomeComponent extends Component{
                 <div>
                     You can manage your tasks <Link to="/tasks">here</Link>.
                 </div>
-                <div>
+                {/* <div>
                     Click here to get a customized welcome message.
                     <button className='btn btn-success' onClick={this.retrieveWelcomeMessage}>Get welcome message</button>                
                 </div>
                 <div className="container">
                     {this.state.welcomeMessage}
-                </div>
+                </div> */}
             </div>
         );
     }
@@ -35,17 +35,27 @@ class WelcomeComponent extends Component{
     retrieveWelcomeMessage(){
         HelloWorldService.executeHelloWorldService(this.props.match.params.name)
         .then(response=>this.handleSuccessfulResponse(response))
-        .catch(error=>this.handleError(error))
+        .catch(error=>this.handleError(error))  
     }
 
     handleSuccessfulResponse(response){
         console.log(response)
         this.setState({welcomeMessage : response.data.message})
     }
-
+ 
     handleError(error){
         console.log(error.response)
-        this.setState({welcomeMessage : error.response.data.message})
+        let errorMessage = '';
+
+        if(error.message)
+            errorMessage += errorMessage
+
+        if(error.response && error.response.data){
+            errorMessage += error.response.data.message
+        }
+
+        this.setState({welcomeMessage : errorMessage})
+        
     }
 }
 

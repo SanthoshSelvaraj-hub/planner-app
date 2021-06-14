@@ -1,6 +1,7 @@
 import { Component } from "react";
 import TaskDataService from '../../api/planner/TaskDataService'
 import AuthenticationService from './AuthenticationService.js'
+import moment from 'moment'
 
 class TaskListComponent extends Component{
     constructor(props){
@@ -17,6 +18,8 @@ class TaskListComponent extends Component{
 
         this.deleteTaskClicked = this.deleteTaskClicked.bind(this)
         this.refreshTasks = this.refreshTasks.bind(this)
+        this.editTaskClicked = this.editTaskClicked.bind(this)
+        this.addTaskClicked = this.addTaskClicked.bind(this)
     }
 
     componentDidMount(){
@@ -58,6 +61,12 @@ class TaskListComponent extends Component{
 
     }
 
+    addTaskClicked(){
+        
+        this.props.history.push(`/tasks/-1`)
+
+    }
+
     
     render(){
         return(
@@ -83,7 +92,7 @@ class TaskListComponent extends Component{
                                         <tr key={task.id}>
                                             <td>{task.description}</td>
                                             <td>{task.done.toString()}</td>
-                                            <td>{task.targetDate.toString()}</td>
+                                            <td>{moment(task.targetDate).format('YYYY-MM-DD')}</td>
                                             <td><button className="btn btn-success" onClick={()=>this.editTaskClicked(task.id)}>Edit</button></td>
                                             <td><button className="btn btn-danger" onClick={()=>this.deleteTaskClicked(task.id)}>Delete</button></td>
                                         </tr>
@@ -91,6 +100,9 @@ class TaskListComponent extends Component{
                                 }   
                             </tbody>
                         </table>
+                        <div className='row'>
+                                <button className="btn btn-success" onClick={this.addTaskClicked}>Add</button>
+                        </div>
                     </div>
             </div>
         );
